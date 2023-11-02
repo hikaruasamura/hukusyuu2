@@ -6,6 +6,10 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
+    <x-app-layout>
+        <x-slot name="header">
+            index
+        </x-slot>
     <body>
         <h1>Blog Name</h1>
         <a href="/categories/{{ $post->category->id }}">{{$post->category->name }}</a>
@@ -27,6 +31,7 @@
         <div class='paginate'>
             {{ $posts->links() }}
         </div>
+        {{ Auth::user()->name }}
         <script>
     function deletePost(id) {
         'use strict'
@@ -36,5 +41,19 @@
         }
     }
 </script>
+<div>
+    @foreach($questions as $question)
+    <div>{{ $question['title'] }}</div>
+    @endforeach
+</div>
+<div>
+    @foreach($questions as $question)
+    <div>
+        <a href="https://teratail.com/questions/{{ $question['id'] }}">
+            {{ $question['title'] }}
+        </a>
+    </div>
+</div>
     </body>
+    </x-app-layout>
 </html>

@@ -7,8 +7,23 @@ use App\Models\Category;
 
 class PostController extends Controller
 {
-    public function index(post $post){
-        return view('posts.index')->with(['post' => $post->getPaginateByLimit()]);
+    public function index(Post $post){
+        $client = new \GuzzleHttp\Client();
+        
+        $url ='https://teratail.com/api/v1/questions';
+        
+        $response = $client->request(
+            'GET',
+            $url,
+            ['Bearer' => config('service.teratail.token')]
+            );
+            
+            $questions = json_decode($response->getBody(), true);
+            
+            return view('posts.index')->with([
+                'posts' => $post->getPaginateByLimit(),
+                'questions' => $questions['questions'],
+                ]);
     }
     
     public function show(Post $post){

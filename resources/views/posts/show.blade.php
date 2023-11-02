@@ -7,6 +7,10 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
+    <x-app-layout>
+        <x-slot name="header">
+            show
+        </x-slot>
     <body>
         <a href="categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
         <a href="">{{ $post->category->name }}</a>
@@ -24,4 +28,5 @@
         </div>
         <div class="edit"><a href="/posts/{{ $post->id }}/edit">edit</a></div>
     </body>
+    </x-app-layout>
 </html>
